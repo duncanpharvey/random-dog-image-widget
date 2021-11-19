@@ -1,0 +1,8 @@
+node_modules
+.eslintcache
+.gitignore
+LICENSE
+README.md
+docker-compose.yml
+Dockerfile
+build

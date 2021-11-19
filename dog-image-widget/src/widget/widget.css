@@ -1,0 +1,22 @@
+/* CSS files add styling rules to your content */
+
+body {
+  margin: 0px;
+}
+
+.image-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+}
+
+img {
+  position:relative;
+  object-position: center center;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  top:0;
+  left:0;
+}
