@@ -26,19 +26,29 @@ function Widget() {
         if (typeof breed !== "string") {
           return;
         }
-        // setImage(await getImage(breed));
-        const imageUrl = await fetch(
-          `http://localhost:3001/image?breed_id=${breed}`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            return data.imageUrl;
-          });
-        console.log(imageUrl);
-        setImage(imageUrl);
+        getImage(breed);
       }
     );
   }, []);
+
+  async function cycleImage() {
+    const breed = await client.getContext().then((c) => {
+      return c.widget?.definition.options?.breed;
+    });
+    getImage(breed);
+  }
+
+  async function getImage(breed: string) {
+    const imageUrl = await fetch(
+      `http://localhost:3001/image?breed_id=${breed}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        return data.imageUrl;
+      });
+    console.log(imageUrl);
+    setImage(imageUrl);
+  }
 
   var imageElement;
 
@@ -65,7 +75,16 @@ function Widget() {
       ]);
     });
 
-  return <div className="image-wrapper">{imageElement}</div>;
+  return (
+    <div>
+      <div id="button-wrapper">
+        <button id="new-dog" onClick={cycleImage}>
+          New Dog
+        </button>
+      </div>
+      <div className="image-wrapper">{imageElement}</div>
+    </div>
+  );
 }
 
 export default function render() {
